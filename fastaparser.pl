@@ -1,24 +1,13 @@
 #!/usr/bin/perl
+
+
 use warnings;
 use strict;
 
-my  %sequence=();
-my $key="";
+use fastaparser;
 
-my  $filename="fasta.fa";
-open FASTA, $filename or die "$filename.$!";
-while (<FASTA>)
-{
-    if ($_=~/^>/) 
-    {
-	$sequence{"$_"}="";
-	$key=$_;
-    }
-    else
-    {
-	$sequence{$key}=$sequence{$key}.$_;
+my $filename="fasta.file";
 
-    }
-}
+my %sequences = fastaparser::parse_fasta_file($filename);
 
-close FASTA;
+
